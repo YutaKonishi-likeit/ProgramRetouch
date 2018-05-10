@@ -1,10 +1,18 @@
 <%@	page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="beans.BuyDataBeans"%>
+<%@ page import="beans.BuyDetailDataBeans"%>
+<%@ page import=" java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>購入履歴詳細</title>
 <jsp:include page="/baselayout/head.html" />
+<%
+	String validationMessage = (String) request.getAttribute("validationMessage");
+	BuyDataBeans buyHistry = (BuyDataBeans)request.getAttribute("buyHistry");
+	ArrayList<BuyDetailDataBeans> userBuyList = (ArrayList<BuyDetailDataBeans>) request.getAttribute("userBuyList");
+%>
 </head>
 <body>
 	<jsp:include page="/baselayout/header.jsp" />
@@ -24,14 +32,14 @@
 								<tr>
 									<th class="center" style="width: 20%;">購入日時</th>
 									<th class="center">配送方法</th>
-									<th class="center" style="width: 20%">合計金額</th>
+									<th class="center" style="width: 20%">購入金額</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td class="center">1234年56月78日90時12分</td>
-									<td class="center">サンプル</td>
-									<td class="center">123456789円</td>
+									<td class="center"><%=buyHistry.getFormatDate()%></td>
+									<td class="center"><%=buyHistry.getDeliveryMethodName()%></td>
+									<td class="center"><%=buyHistry.getTotalPrice()%>円</td>
 								</tr>
 							</tbody>
 						</table>
@@ -52,22 +60,23 @@
 								</tr>
 							</thead>
 							<tbody>
+							<%
+									for (BuyDetailDataBeans userBuy : userBuyList) {
+								%>
+
 								<tr>
-									<td class="center">サンプル商品名1</td>
-									<td class="center">111111111円</td>
+									<td class="center"><%=userBuy.getBuyItemName()%></td>
+									<td class="center"><%=userBuy.getBuyItemPrice()%>円</td>
 								</tr>
+								<%
+									}
+								%>
 								<tr>
-									<td class="center">サンプル商品名2</td>
-									<td class="center">222222222円</td>
+									<td class="center"><%=buyHistry.getDeliveryMethodName()%></td>
+									<td class="center"><%=buyHistry.getDeliveryMethodPrice()%>円</td>
 								</tr>
-								<tr>
-									<td class="center">サンプル商品名3</td>
-									<td class="center">333333333円</td>
-								</tr>
-								<tr>
-									<td class="center">サンプル</td>
-									<td class="center">123456789円</td>
-								</tr>
+
+
 							</tbody>
 						</table>
 					</div>

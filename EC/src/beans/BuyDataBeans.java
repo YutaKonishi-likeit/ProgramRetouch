@@ -10,11 +10,18 @@ public class BuyDataBeans  implements Serializable {
 	private int totalPrice;
 	private int deliveryMethodId;
 	private Date buyDate;
+	private String buyDateString;
 
 	private String deliveryMethodName;
 	private int deliveryMethodPrice;
 
 
+	public String getBuyDateString() {
+		return buyDateString;
+	}
+	public void setBuyDateString(String buyDateString) {
+		this.buyDateString = buyDateString;
+	}
 	public int getId() {
 		return id;
 	}
